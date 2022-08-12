@@ -6,6 +6,6 @@
     <title>StockeAR</title>
 </head>
 <body>
-   Holadasdasd
+
 </body>
 </html>
