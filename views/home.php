@@ -6,49 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock-AR</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/small.css"'>
+    <link rel="stylesheet" href='./css/medium.css'>
+    <link rel="stylesheet" href='./css/large.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
-    <link rel="stylesheet" href="css/principal.css">
 </head>
 <body>
     <div class="container">
-        <div class="row mt-3" id="encabezado-logo">
-            <div class="col-md-4 col-xs-12 col-sm-12 text-center">
-              <h4><i class="fa-solid fa-kitchen-set"></i></h4>
-              <h3>Bienvenidos a Stock-AR</h3> 
-            </div>
-            <div class="col-md-4 off offset-md-4 col-xs-12 col-sm-12" id="inicio-sesion">
-                <i class="fa fa-user" aria-hidden="true" id="logo-inicio-sesion"></i>
-                <a href="#">  Iniciar Sesion</a>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-12" id="banner-principal">
-                
-            </div>
-        </div>
+        <header>
+          <?php require_once $_SERVER['DOCUMENT_ROOT'].'/c6-13-m-php/auxiliares/header.php'; ?>
+        </header> 
         <nav class="navbar navbar-expand-lg  mt-5">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#" id="menu-reponsive">Menu</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav col-md-12">
-                  <li class="nav-item col-md-3">
-                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                  </li>
-                  <li class="nav-item col-md-3">
-                    <a class="nav-link" href="#">Agregar productos</a>
-                  </li>
-                  <li class="nav-item col-md-3">
-                    <a class="nav-link" href="#">Mis listas</a>
-                  </li>
-                  <li class="nav-item col-md-3">
-                    <a class="nav-link " href="#">Almacenamiento</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
+          <?php require_once $_SERVER['DOCUMENT_ROOT'].'/c6-13-m-php/auxiliares/nav-bar.php'; ?>
         </nav>
         <hr>
         <div class="row ">
@@ -80,9 +49,7 @@
         </div>
         <hr>
             <footer class="mt-3 row ">
-              <div class="col-md-12 text-center">
-               <p>@Copyright. c6-13-php</p> 
-              </div>
+              <?php require_once $_SERVER['DOCUMENT_ROOT'].'/c6-13-m-php/auxiliares/footer.php'; ?>
             </footer>
     </div>
 </body>

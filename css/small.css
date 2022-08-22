@@ -4,7 +4,7 @@
 }
 @font-face {
   font-family: 'dynapuff';
-  src: url('fonts/DynaPuff.ttf') format('ttf');
+  src: url('../multimedia/fonts/DynaPuff.ttf') format('ttf');
   font-style: normal;
   font-weight: normal;
 }
@@ -16,7 +16,7 @@ body{
   display: none;
 }
 #banner-principal{
-  background-image: url("../img/banner-principal.jpg");
+  background-image: url("../multimedia/imagenes/banner-principal.jpg");
   height: 200px;
   background-size: cover;
 }
@@ -38,11 +38,11 @@ body{
   background-size: cover;
 }
 #img-crear-lista{
-  background-image: url("../img/crear-lista.png");
+  background-image: url("../multimedia/imagenes/crear-lista.png");
 }
 #img-ultima-lista{
-  background-image: url("../img/ultimas-listas.png");
+  background-image: url("../multimedia/imagenes/ultimas-listas.png");
 }
 #img-almacen{
-  background-image: url("../img/almacen.PNG");
+  background-image: url("../multimedia/imagenes/almacen.PNG");
 }

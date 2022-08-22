@@ -34,5 +34,22 @@ function agregarArticulo($nombre_articulo, $cod_categoria, $unidad_medida, $cant
 }
 
 function obtenerInfoArticulo($id_articulo){
-
+  //create a connection object using the connection to the database
+  $db = conexion();
+  //The SQL statement
+  $sql = 'SELECT * FROM tbl_acticulos WHERE id_articulo = :id_articulo';
+  //Create the prepared statement using the database connection
+  $stmt = $db->prepare($sql);
+  //The next line replace the placeholder in the SQL statement
+  //with the actual value in the variable
+  //and tells the database the type of data it is
+  $stmt->bindValue(':id_articulo', $id_articulo, PDO::PARAM_INT);
+  //Insert the data 
+  $stmt->execute();
+  //ask how many rows changed as a result of our insert
+  $info_articulo = $stmt->fetch(PDO::FETCH_ASSOC);
+  //Close the database interaction
+  $stmt->closeCursor();
+  //Return the indication of succes (rows changed)
+  return $info_articulo;
 }

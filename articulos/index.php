@@ -54,7 +54,17 @@ switch ($action){
     break;
 
   case 'editarArt':
+    //Store the id_articulo into a variable, filter and sanitized
     $id_articulo = filter_input(INPUT_GET, 'id_articulo', FILTER_VALIDATE_INT);
+    //Use the id_articulo to get all the information for that articule and store it in to a variable
     $info_articulo = obtenerInfoArticulo($id_articulo);
+    //Check if there is any info for that ID
+    if (count($info_articulo) < 1){
+      $message = "<p class='error-message'> Lo sentimos, no existe información para éste artículo. Intenta nuevamente </p>";
+      include '../views/mis-articulos.php';
+    }
+    include '../views/modificar-articulo.php';
+    exit;
+    break;
     
 }
