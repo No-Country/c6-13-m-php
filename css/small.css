@@ -1,0 +1,48 @@
+.titulo-funciones{
+  height: 100px;
+  font-weight: bold;
+}
+@font-face {
+  font-family: 'dynapuff';
+  src: url('../multimedia/fonts/DynaPuff.ttf') format('ttf');
+  font-style: normal;
+  font-weight: normal;
+}
+body{
+  font-family: "dynapuff";
+  background-color: #F5B275;
+}
+#menu-reponsive{
+  display: none;
+}
+#banner-principal{
+  background-image: url("../multimedia/imagenes/banner-principal.jpg");
+  height: 200px;
+  background-size: cover;
+}
+#inicio-sesion a{
+  color: black;
+  font-size: 18px;
+}
+#navbarNav{
+  font-size: large;
+  color: black;
+  font-weight: bold;
+}
+.textseccion{
+  text-align: justify;
+  font-size: 18px;
+}
+.img-seccion{
+  height:300px;
+  background-size: cover;
+}
+#img-crear-lista{
+  background-image: url("../multimedia/imagenes/crear-lista.png");
+}
+#img-ultima-lista{
+  background-image: url("../multimedia/imagenes/ultimas-listas.png");
+}
+#img-almacen{
+  background-image: url("../multimedia/imagenes/almacen.PNG");
+}
