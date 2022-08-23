@@ -46,3 +46,21 @@ body{
 #img-almacen{
   background-image: url("../multimedia/imagenes/almacen.PNG");
 }
+
+/*login*/
+
+#contenedor {
+	position: absolute;
+	width: 325px;
+	height: 183px;
+	z-index: 1;
+	left: 529px;
+	top: 198px;
+}
+#contenedor #form1 table tr td div {
+	font-family: "Comic Sans MS", cursive;
+	color: #000;
+}
+body,td,th {
+	font-size: 20px;
+}

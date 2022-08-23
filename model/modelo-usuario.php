@@ -4,7 +4,7 @@
 //en el modelo van las operaciones con la base de datos
 
 //This new function will control site visitors registration
-function regClient($nombre_usuario, $apellido_usuario,$fecha_nacimiento, $mail_usuario, $clave_usuario){
+function regUsuario($nombre_usuario, $apellido_usuario,$fecha_nacimiento, $mail_usuario, $clave_usuario){
     // Create a connection object using the phpmotors connection function
     $db = conectar(); //variable de conexion
     //The sql INSERT statement to register the user in the database
