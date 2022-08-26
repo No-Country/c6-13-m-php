@@ -83,7 +83,7 @@ function editarArticulo($nombre_articulo, $cod_categoria, $unidad_medida, $canti
   return $rowsChanged;
 }
 
-function obtenerArticuloPorUsuario($cod_usuario){
+function obtenerArticulosPorUsuario($cod_usuario){
   $db = conectar();
   $sql = 'SELECT *
   FROM tbl_articulos
@@ -94,4 +94,15 @@ function obtenerArticuloPorUsuario($cod_usuario){
   $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
   $stmt->closeCursor();
   return $articulos;
+}
+
+function obtenerCategorias(){
+  $db = conectar();
+  $sql = 'SELECT *
+  FROM tbl_categorias ORDER BY id_categoria ASC';
+  $stmt = $db->prepare($sql);
+  $stmt->execute();
+  $categorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $stmt->closeCursor();
+  return $categorias;
 }

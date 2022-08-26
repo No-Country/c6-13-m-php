@@ -4,12 +4,12 @@
 //en el modelo van las operaciones con la base de datos
 
 //This new function will control site visitors registration
-function regUsuario($nombre_usuario, $apellido_usuario,$fecha_nacimiento, $mail_usuario, $clave_usuario){
+function regUsuario($nombre_usuario, $apellido_usuario, $fecha_nacimiento, $fecha_creacion, $mail_usuario, $clave_usuario){
     // Create a connection object using the phpmotors connection function
     $db = conectar(); //variable de conexion
     //The sql INSERT statement to register the user in the database
-    $sql = 'INSERT INTO tbl_usuarios (nombre_usuario,apellido_usuario, fecha_nacimiento, mail_usuario, clave_usuario)
-    VALUES (:nombre_usuario, :apellido_usuario, :fecha_nacimiento, :mail_usuario, :clave_usuario)';
+    $sql = 'INSERT INTO tbl_usuarios (nombre_usuario, apellido_usuario, fecha_nacimiento, fecha_creacion, mail_usuario, clave_usuario)
+    VALUES (:nombre_usuario, :apellido_usuario, :fecha_nacimiento, :fecha_creacion, :mail_usuario, :clave_usuario)';
     // create the prepared statement using the phpmotors connection
     $stmt = $db->prepare($sql);
     //The four lines replace the sql statement with the actual values in the variables
@@ -17,6 +17,7 @@ function regUsuario($nombre_usuario, $apellido_usuario,$fecha_nacimiento, $mail_
     $stmt->bindValue(':nombre_usuario',$nombre_usuario, PDO::PARAM_STR);
     $stmt->bindValue(':apellido_usuario',$apellido_usuario, PDO::PARAM_STR);
     $stmt->bindValue(':fecha_nacimiento',$fecha_nacimiento, PDO::PARAM_STR);
+    $stmt->bindValue(':fecha_creacion',$fecha_creacion, PDO::PARAM_STR);
     $stmt->bindValue(':mail_usuario',$mail_usuario, PDO::PARAM_STR);
     $stmt->bindValue(':clave_usuario',$clave_usuario, PDO::PARAM_STR);
     //Insert the data
@@ -59,8 +60,9 @@ function getUsuario($mail_usuario){
     //Gets the connection to the sever and DB
     $db = conectar();
     //SQL to get the user info mation from the DB
-    $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, mail_usuario,  clave_usuario FROM tbl_usuarios
-            WHERE mail_usuario = :mail_usuario';
+    $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, fecha_nacimiento, fecha_creacion, mail_usuario, clave_usuario
+    FROM tbl_usuarios
+    WHERE mail_usuario = :mail_usuario';
     //code to prepare the sql statement
     $stmt = $db->prepare($sql);
     //bind the placeholder to the passed in variable
@@ -69,7 +71,9 @@ function getUsuario($mail_usuario){
     $stmt->execute();
     //fetch the user detail with the the table column name as the associative name value pair
     $clientInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+
     $stmt->closeCursor();
+
     return $clientInfo;
 }
 //function to change client password

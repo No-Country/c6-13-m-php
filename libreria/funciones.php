@@ -11,6 +11,35 @@ function checkPassword($clave_usuario){
     return preg_match($pattern, $clave_usuario);
 }
 
+function crearListadeCategorias($categorias){
+    $listaCategorias = '<label for="listaCategorias">Elige una categoria: <select name="id_categoria" id="listaCategorias">';
+    $listaCategorias .= "<option>Categoria</option>";
+    foreach ($categorias as $categoria) {
+      $listaCategorias .= "<option value='$categoria[id_categoria]'>$categoria[Nombre_categoria]</option>";
+    }
+    $listaCategorias .= '</select></label>';
+    return $listaCategorias;
+  }
+
+function mostrarArticulos($listaArticulos){
+    $dataTable = '<thead>';
+    $dataTable .= '<tr><th>Articulo</th><td>Categoria</td><td>Unidad Medida</td><td>Cantidad</td><td>Vencimiento</td><td>Estado</td></tr>';
+    $dataTable .= '</thead>';
+    //set up the table body
+    $dataTable .= '<tbody>';
+    //iterate over all vehicles in the array and put each in a row
+    forEach($listaArticulos as $articulo){
+        $dataTable .= "<tr><td>$articulo[nombre_articulo]</td>";
+        $dataTable .= "<td>$articulo[cod_categoria]</td>";
+        $dataTable .= "<td>$articulo[unidad_medida]</td>";
+        $dataTable .= "<td>$articulo[cantidad_articulo]</td>";
+        $dataTable .= "<td>$articulo[fecha_vencimiento]</td>";
+        $dataTable .= "<td>$articulo[estado]</td></tr>";
+    }
+    $dataTable .= '</tbody>';
+    return $dataTable;
+}
+
 
 // ctrl + k + u = descomenta
 

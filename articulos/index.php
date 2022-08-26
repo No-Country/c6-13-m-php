@@ -8,7 +8,12 @@ session_start();
 require_once '../libreria/conexion.php';
 //Get the List model for use as needed
 require_once '../model/modelo-articulo.php';
+//Get the functions
+require_once '../libreria/funciones.php';
 
+//Obtener el array de categorias
+$categorias = obtenerCategorias();
+$listaCategorias = crearListadeCategorias($categorias);
 
 //Filter the inputs
 $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -18,10 +23,7 @@ if ($action == NULL){
 
 //Create switch statement and cases
 switch ($action){
-  case 'agregarArticulos':
-    include '../views/nuevo-articulo.php';
-    break;
-
+  
   case 'agregarArticulo':
     $nombre_articulo = trim(filter_input(INPUT_POST, 'nombre_articulo', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
     $cod_categoria = trim(filter_input(INPUT_POST, 'cod_categoria', FILTER_SANITIZE_NUMBER_INT));
@@ -51,6 +53,9 @@ switch ($action){
       include '../views/nuevo-articulo.php';
       exit;
     }
+    $listaArticulos = obtenerArticulosPorUsuario($cod_usuario);
+    $mostrarArticulos = mostrarArticulos($listaArticulos);
+
     break;
 
   case 'editarArt':
@@ -65,6 +70,11 @@ switch ($action){
     }
     include '../views/modificar-articulo.php';
     exit;
+    break;
+
+  default:
+    
+    include '../views/mis-articulos.php';
     break;
     
 }

@@ -23,11 +23,11 @@
         <div class="row ">
             <div class="col-md-4 text-center">
                 <h1 class="titulo-funciones">Crear Lista</h1>
-                <p class="textseccion"  style="height:100px ;">En este apartado podremos crear las lista de compra se deplegara un formulario en el cual podras ingresar los porducos que deseas comprar.</p>
+                <p class="textseccion"  style="height:100px ;">En este apartado podremos crear un stock de los artículos que tenemos en casa se deplegara un formulario en el cual podras ingresar los pprductos que deseas agregar.</p>
                 <div  class="img-seccion" id="img-crear-lista">
                   
                 </div>
-                <button class="btn btn-primary mt-3">Crear lista</button>
+               <a href="/c6-13-m-php/articulos"><button class="btn btn-primary mt-3">Agregar productos al Stock</button></a> 
             </div>
             <div class="col-md-4 text-center">
               <h1 class="titulo-funciones">Ultima Lista</h1>

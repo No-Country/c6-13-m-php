@@ -1,12 +1,12 @@
 <div class="container-fluid">
-    <a class="navbar-brand" href="#" id="menu-reponsive">Menu</a>
+    <p class="navbar-brand" href="#" id="menu-reponsive">Menu</p>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav col-md-12">
       <li class="nav-item col-md-3">
-        <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+        <a class="nav-link active" aria-current="page" href="/c6-13-m-php/">Inicio</a>
       </li>
       <li class="nav-item col-md-3">
         <a class="nav-link" href="#">Agregar productos</a>
