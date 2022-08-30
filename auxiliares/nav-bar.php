@@ -9,7 +9,7 @@
         <a class="nav-link active" aria-current="page" href="/c6-13-m-php/">Inicio</a>
       </li>
       <li class="nav-item col-md-3">
-        <a class="nav-link" href="#">Agregar productos</a>
+        <a class="nav-link" href="/c6-13-m-php/articulos">Agregar productos</a>
       </li>
       <li class="nav-item col-md-3">
         <a class="nav-link" href="#">Mis listas</a>

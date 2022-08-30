@@ -34,11 +34,12 @@ if(!$_SESSION['loggedin']){
       echo $message;
     }
     ?>
-    <p class="admin-p">Estás logueado!</p>
+    <p class="admin-p">Usted se logueó correctamente!</p>
     <ul>
       <li>Nombre: <?php echo $_SESSION['usuarioInfo']['nombre_usuario'] ?></li>
       <li>Apellido: <?php echo $_SESSION['usuarioInfo']['apellido_usuario'] ?></li>
       <li>Email: <?php echo $_SESSION['usuarioInfo']['mail_usuario'] ?></li>
+      <li>Fecha de nacimiento: <?php echo $_SESSION['usuarioInfo']['fecha_nacimiento'] ?></li>
     </ul>
     <h2>Manejo de cuenta</h2>
     <p class='admin-p'>Usa este link para editar la información de tu cuenta <a href='/c6-13-m-php/usuarios/?action=editarPerfil'>Actualizar Información de la cuenta</a></p>

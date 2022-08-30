@@ -63,7 +63,7 @@ switch ($action){
         if ($regOutCome === 1) {
             //Set Cookie
             // setcookie('firstname', $nombre_usuario, strtotime('+ 1 year'), '/');
-            $_SESSION['message'] = "<p class='successMsg'>Gracias por registrarse, $nombre_usuario. Por favor, loguearse con email y contraseña.</p>";
+            $_SESSION['message'] = "<p class='mensajeExito'>Gracias por registrarse, $nombre_usuario. Por favor, loguearse con email y contraseña.</p>";
             header('Location: /c6-13-m-php/usuarios/?action=login');
             exit;
         }
@@ -118,7 +118,6 @@ switch ($action){
 
      //Case Statement to deliver the login view when the "My Account" link is clicked
      case 'loggedin':
-        $UsuarioInfo = $_SESSION['usuarioInfo'];
         include '../views/perfil.php';
           break;
     //Case Statement to deliver the login view when the "My Account" link is clicked
@@ -132,11 +131,13 @@ switch ($action){
     
     //Case to deliver the account update view to the user
     case 'editarPerfil':
+        $usuarioInfo = $_SESSION['usuarioInfo'];
         include "../views/modificar-perfil.php";
         break;
 
     //Case to change the client's password
     case 'changePassword':
+        $usuarioInfo = $_SESSION['usuarioInfo'];
         //get the password input and sanitize it
         $clave_usuario = trim(filter_input(INPUT_POST, 'clave_usuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $clientId = trim(filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT));
@@ -144,7 +145,7 @@ switch ($action){
         $checkPassword = checkPassword($clave_usuario);
 
         if (empty($checkPassword)) {
-            $message = '<p class="mensajeError">Chequear la contraseña ingresada</p>';
+            $secondmessage = '<p class="mensajeError">Chequear la contraseña ingresada</p>';
             include '../views/modificar-perfil.php';
             exit;
         }
@@ -153,7 +154,7 @@ switch ($action){
         //Call the function that updates the clients table with the new password
         $passwordStatus = changePassword($clientId, $hashedPassword);
         if ($passwordStatus === 1) {
-            $_SESSION['message'] = "<p class='successMsg'>Su clave fue ingresada correctamente</p>";
+            $_SESSION['message'] = "<p class='mensajeExito'>Su clave fue ingresada correctamente</p>";
             header("Location: /c6-13-m-php/usuarios/");
             exit;
         }
@@ -165,6 +166,7 @@ switch ($action){
 
     //Case to update user information
     case 'updateUsuarioInfo':
+        $usuarioInfo = $_SESSION['usuarioInfo'];
         //Get the user details and sanitize the values
         $nombre_usuario = trim(filter_input(INPUT_POST, 'nombre_usuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $apellido_usuario = trim(filter_input(INPUT_POST, 'apellido_usuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
@@ -172,37 +174,34 @@ switch ($action){
         $clientId = trim(filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT));
         //Check the email to ensure it is valid
         $mail_usuario = checkEmail($mail_usuario);
-        //Get the current client Email address that is stored in the Session Variable
-        $curEmail = $_SESSION['UsuarioData']['emailclie$mail_usuario'];
 
         //Code block to check if the the user sent any empty form inputs
         if (empty($nombre_usuario) || empty($apellido_usuario) || empty($mail_usuario)){
-            $message = "<p class='mensajeError'>Por favor, rellene con los datos solicitados.</p>";
+            $secondmessage = "<p class='mensajeError'>Por favor, rellene con todos los datos solicitados.</p>";
             include '../views/modificar-perfil.php';
             exit;
         }
-        elseif ($curEmail != $mail_usuario){
-            $emailUnique = checkUniqueEmail($mail_usuario);
-            if ($emailUnique == 1) {
-                $message = "<p class='mensajeError'>Email no disponible, pruebe con otro</p>";
-                include '../views/modificar-perfil.php';
-                exit;
-            }
+        if($mail_usuario != $usuarioInfo['mail_usuario']){
+          $checknewEmail = checkuniqueEmail($mail_usuario);
+          if($checknewEmail == 1){
+            $firstmessage = "<p class='empty-fields'>Hola $nombre_usuario, el email: $mail_usuario ya ha sido registrado en nuestra abse de datos.
+            Por favor intente con otra dirección de email.</p>";
+            include '../view/client-update.php';
+            exit;
+          }
         }
         //call the function in the model that inserts the update in the table
-        $updateStatus = updateUsuarioInfo($clientId, $nombre_usuario, $apellido_usuario, $email_usuario);
+        $updateStatus = updateUsuarioInfo($id_usuario, $nombre_usuario, $apellido_usuario, $fecha_nacimiento, $mail_usuario);
         if ($updateStatus === 1) {
-            $clientUpdate = getUsuarioUpdate($clientId);
-            //Remove the password from the array, the function removes the last item in an array
-            array_pop($clientUpdate);
+            $clientUpdate = getUsuarioUpdate($id_usuario);
             //Store the array in a session
-            $_SESSION['UsuarioData'] = $clientUpdate;
-            $_SESSION['message'] = "<p class='successMsg'>$nombre_usuario, su informacion fue actualizada correctamente.</p>";
+            $_SESSION['usuarioInfo'] = $clientUpdate;
+            $_SESSION['message'] = "<p class='mensajeExito'>$nombre_usuario, su informacion fue actualizada correctamente.</p>";
             header("Location: /c6-13-m-php/usuarios/");
             exit;
         }
         else{
-            $_SESSION['message'] = "<p class='mensajeError'>$nombre_usuario, su informacion no fue actualizada. Reintente.</p>";
+            $_SESSION['message'] = "<p class='mensajeError'>$nombre_usuario, su informacion no fue actualizada. Intente nuevamente por favor.</p>";
             header("Location: /c6-13-m-php/usuarios/");
             exit;
         }
@@ -211,6 +210,6 @@ switch ($action){
 
     //The default case to deliver the admin view
     default:
-    include '../view/admin.php';
+    include '../views/perfil.php';
     break;        
 }

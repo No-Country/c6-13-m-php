@@ -39,7 +39,7 @@ function checkUniqueEmail($mail_usuario){
     //A prepared statement to prepare the sql code
     $stmt = $db->prepare($sql);
     //Bind the real value to th eplac holder used
-    $stmt->bindValue(':mail_usuario',$mail_usuario,PDO::PARAM_STR);
+    $stmt->bindValue(':mail_usuario', $mail_usuario, PDO::PARAM_STR);
     //The next line executes the code in the DB
     $stmt->execute();
     //The next line fetches the row of data that matches the email address if any
@@ -101,36 +101,37 @@ function changePassword ($idusuario, $clave_usuario) {
 }
 
 //function to update the client information
-function updateUsuarioInfo ($idusuario, $nombre_usuario, $apellido_usuario, $mail_usuario) {
+function updateUsuarioInfo($idusuario, $nombre_usuario, $apellido_usuario, $fecha_nacimiento, $mail_usuario) {
     // Create a connection object using the phpmotors coonection function
-$db = conectar();
-//The sql INSERT statement to update the user info in the users table
-$sql = 'UPDATE tbl_usuarios
-        SET nombre_usuario = :nombre_usuario, apellido_usuario = :apellido_usuario, mail_usuario = :mail_usuario
-        WHERE id_usuario = :id_usuario';
-// create the prepared statement using the phpmotors connection
-$stmt = $db->prepare($sql);
-//The next lines replace the sql placeholders with the actual values in the variables
-//The also tell the database the type of data they are.
-$stmt->bindValue(':id_usuario',$idusuario, PDO::PARAM_INT);
-$stmt->bindValue(':nombre_usuario',$nombre_usuario, PDO::PARAM_STR);
-$stmt->bindValue(':apellido_usuario',$apellido_usuario, PDO::PARAM_STR);
-$stmt->bindValue(':mail_usuario',$mail_usuario, PDO::PARAM_STR);
-//Insert the data
-$stmt->execute();
-//Ask how many rows changed as result of the insert
-$rowsChanged = $stmt->rowCount();
-//close the database interaction
-$stmt->closeCursor();
-//Return the indication of success(rows changed)
-return $rowsChanged;
+    $db = conectar();
+    //The sql INSERT statement to update the user info in the users table
+    $sql = 'UPDATE tbl_usuarios
+            SET nombre_usuario = :nombre_usuario, apellido_usuario = :apellido_usuario, fecha_nacimiento = :fecha_nacimiento, mail_usuario = :mail_usuario
+            WHERE id_usuario = :id_usuario';
+    // create the prepared statement using the phpmotors connection
+    $stmt = $db->prepare($sql);
+    //The next lines replace the sql placeholders with the actual values in the variables
+    //The also tell the database the type of data they are.
+    $stmt->bindValue(':id_usuario', $idusuario, PDO::PARAM_INT);
+    $stmt->bindValue(':nombre_usuario', $nombre_usuario, PDO::PARAM_STR);
+    $stmt->bindValue(':apellido_usuario', $apellido_usuario, PDO::PARAM_STR);
+    $stmt->bindValue(':fecha_nacimiento', $fecha_nacimiento, PDO::PARAM_STR);
+    $stmt->bindValue(':mail_usuario', $mail_usuario, PDO::PARAM_STR);
+    //Insert the data
+    $stmt->execute();
+    //Ask how many rows changed as result of the insert
+    $rowsChanged = $stmt->rowCount();
+    //close the database interaction
+    $stmt->closeCursor();
+    //Return the indication of success(rows changed)
+    return $rowsChanged;
 }
 
 function getUsuarioUpdate($id_usuario){
     //Gets the connection to the sever and DB
     $db = conectar();
     //SQL to get the updated user infomation from the DB
-    $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, mail_usuario, clientLevel, clave_usuario 
+    $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, fecha_nacimiento, fecha_creacion, mail_usuario, clave_usuario
             FROM tbl_usuarios
             WHERE id_usuario = :id_usuario';
     //code to prepare the sql statement
