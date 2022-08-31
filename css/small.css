@@ -2,14 +2,9 @@
   height: 100px;
   font-weight: bold;
 }
-@font-face {
-  font-family: 'dynapuff';
-  src: url('../multimedia/fonts/DynaPuff.ttf') format('ttf');
-  font-style: normal;
-  font-weight: normal;
-}
+
 body{
-  font-family: "dynapuff";
+  font-family: 'Rajdhani', sans-serif;
   background-color: #b5fdf2;
 }
 #menu-reponsive{

@@ -10,6 +10,8 @@
     <link rel="stylesheet" href='./css/medium.css'>
     <link rel="stylesheet" href='./css/large.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400&family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
+
 </head>
 <body class="container">
     

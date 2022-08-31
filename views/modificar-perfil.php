@@ -15,6 +15,8 @@ if(!$_SESSION['loggedin']){
     <link rel="stylesheet" href='../css/medium.css'>
     <link rel="stylesheet" href='../css/large.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400&family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
+
 </head>
 <body class="container">
     
@@ -84,7 +86,7 @@ if(!$_SESSION['loggedin']){
               id="password" 
               type="password" 
               pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" 
-              name="clientPassword" 
+              name="clave_usuario" 
               required></label>
               <span>La contraseña debe tener al menos 8 caracteres y contener al menos 1 número, 1 mayúscula y un simbolo especial.</span>
               <span>*La actual contraseña cambiará</span>
@@ -103,4 +105,4 @@ if(!$_SESSION['loggedin']){
             </footer>
     
 </body>
-</html>
+</html><?php unset($_SESSION['message']) ?>

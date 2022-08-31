@@ -52,7 +52,7 @@ switch ($action){
         $hashedPassword = password_hash($clave_usuario, PASSWORD_DEFAULT);
 
         //Crear fecha de registro (fecha actual)
-        $fecha_creacion = date('m-d-Y h:i:s a', time());
+        $fecha_creacion = date('Y-m-d');
 
         //calls the function in the accounts-model and passes in values
         $regOutCome = regUsuario($nombre_usuario, $apellido_usuario, $fecha_nacimiento,
@@ -140,7 +140,7 @@ switch ($action){
         $usuarioInfo = $_SESSION['usuarioInfo'];
         //get the password input and sanitize it
         $clave_usuario = trim(filter_input(INPUT_POST, 'clave_usuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-        $clientId = trim(filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT));
+        $id_usuario = trim(filter_input(INPUT_POST, 'id_usuario', FILTER_SANITIZE_NUMBER_INT));
         //Check for the password pattern to make sure it is a match
         $checkPassword = checkPassword($clave_usuario);
 
@@ -152,9 +152,10 @@ switch ($action){
         //Hash the password to make sure it is secure
         $hashedPassword = password_hash($clave_usuario,PASSWORD_DEFAULT);
         //Call the function that updates the clients table with the new password
-        $passwordStatus = changePassword($clientId, $hashedPassword);
+        $passwordStatus = changePassword($hashedPassword, $id_usuario);
         if ($passwordStatus === 1) {
-            $_SESSION['message'] = "<p class='mensajeExito'>Su clave fue ingresada correctamente</p>";
+            $_SESSION['message'] = "<p class='mensajeExito'>Su clave fue modificada correctamente</p>";
+
             header("Location: /c6-13-m-php/usuarios/");
             exit;
         }
@@ -170,13 +171,14 @@ switch ($action){
         //Get the user details and sanitize the values
         $nombre_usuario = trim(filter_input(INPUT_POST, 'nombre_usuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $apellido_usuario = trim(filter_input(INPUT_POST, 'apellido_usuario', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+        $fecha_nacimiento = trim(filter_input(INPUT_POST, 'fecha_nacimiento', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
         $mail_usuario = trim(filter_input(INPUT_POST, 'mail_usuario', FILTER_SANITIZE_EMAIL));
-        $clientId = trim(filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT));
+        $id_usuario = trim(filter_input(INPUT_POST, 'id_usuario', FILTER_SANITIZE_NUMBER_INT));
         //Check the email to ensure it is valid
         $mail_usuario = checkEmail($mail_usuario);
 
         //Code block to check if the the user sent any empty form inputs
-        if (empty($nombre_usuario) || empty($apellido_usuario) || empty($mail_usuario)){
+        if (empty($nombre_usuario) || empty($apellido_usuario) || empty($mail_usuario) || empty($fecha_nacimiento)){
             $secondmessage = "<p class='mensajeError'>Por favor, rellene con todos los datos solicitados.</p>";
             include '../views/modificar-perfil.php';
             exit;
@@ -184,7 +186,7 @@ switch ($action){
         if($mail_usuario != $usuarioInfo['mail_usuario']){
           $checknewEmail = checkuniqueEmail($mail_usuario);
           if($checknewEmail == 1){
-            $firstmessage = "<p class='empty-fields'>Hola $nombre_usuario, el email: $mail_usuario ya ha sido registrado en nuestra abse de datos.
+            $firstmessage = "<p class='mensajeError'>Hola $nombre_usuario, el email: $mail_usuario ya ha sido registrado en nuestra base de datos.
             Por favor intente con otra dirección de email.</p>";
             include '../view/client-update.php';
             exit;
@@ -193,9 +195,10 @@ switch ($action){
         //call the function in the model that inserts the update in the table
         $updateStatus = updateUsuarioInfo($id_usuario, $nombre_usuario, $apellido_usuario, $fecha_nacimiento, $mail_usuario);
         if ($updateStatus === 1) {
-            $clientUpdate = getUsuarioUpdate($id_usuario);
+            $usuarioInfo = getUsuarioUpdate($id_usuario);
+
             //Store the array in a session
-            $_SESSION['usuarioInfo'] = $clientUpdate;
+            $_SESSION['usuarioInfo'] = $usuarioInfo;
             $_SESSION['message'] = "<p class='mensajeExito'>$nombre_usuario, su informacion fue actualizada correctamente.</p>";
             header("Location: /c6-13-m-php/usuarios/");
             exit;
@@ -210,6 +213,7 @@ switch ($action){
 
     //The default case to deliver the admin view
     default:
+    
     include '../views/perfil.php';
     break;        
 }

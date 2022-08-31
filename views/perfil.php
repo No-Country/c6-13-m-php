@@ -11,6 +11,7 @@ if(!$_SESSION['loggedin']){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock-AR</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400&family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/small.css">
     <link rel="stylesheet" href='../css/medium.css'>
     <link rel="stylesheet" href='../css/large.css'>
@@ -34,7 +35,7 @@ if(!$_SESSION['loggedin']){
       echo $message;
     }
     ?>
-    <p class="admin-p">Usted se logueó correctamente!</p>
+    <p class="admin-p">Usted está logueado!</p>
     <ul>
       <li>Nombre: <?php echo $_SESSION['usuarioInfo']['nombre_usuario'] ?></li>
       <li>Apellido: <?php echo $_SESSION['usuarioInfo']['apellido_usuario'] ?></li>
@@ -43,13 +44,13 @@ if(!$_SESSION['loggedin']){
     </ul>
     <h2>Manejo de cuenta</h2>
     <p class='admin-p'>Usa este link para editar la información de tu cuenta <a href='/c6-13-m-php/usuarios/?action=editarPerfil'>Actualizar Información de la cuenta</a></p>
-    <?php 
+    <!-- <?php 
     if($_SESSION['usuarioInfo']['clientLevel'] >1){
       echo "<h2>Vehicles Management</h2>";
       echo "<p class='admin-p'>Administrative clients must use this link to administer inventory</p>";
       echo "<p class='admin-p'>vehicle controller: <a href='/phpmotors/vehicles'>Vehicle Management</a></p>";
     }
-    ?>
+    ?> -->
     <!-- <?php
     if(isset($_SESSION['reviewsData'])){
       $reviewsData = $_SESSION['reviewsData'];
@@ -83,4 +84,4 @@ if(!$_SESSION['loggedin']){
             </footer>
     
 </body>
-</html>
+</html><?php unset($_SESSION['message']) ?>

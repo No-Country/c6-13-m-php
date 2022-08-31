@@ -77,7 +77,7 @@ function getUsuario($mail_usuario){
     return $clientInfo;
 }
 //function to change client password
-function changePassword ($idusuario, $clave_usuario) {
+function changePassword ($clave_usuario, $id_usuario) {
             // Create a connection object using the phpmotors coonection function
         $db = conectar();
         //The sql INSERT statement to update the client password in the clients table
@@ -88,8 +88,8 @@ function changePassword ($idusuario, $clave_usuario) {
         $stmt = $db->prepare($sql);
         //The next lines replace the sql placeholders with the actual values in the variables
         //The also tell the database the type of data they are.
-        $stmt->bindValue(':id_usuario',$idusuario, PDO::PARAM_INT);
         $stmt->bindValue(':clave_usuario',$clave_usuario, PDO::PARAM_STR);
+        $stmt->bindValue(':id_usuario',$id_usuario, PDO::PARAM_INT);
         //Insert the data
         $stmt->execute();
         //Ask how many rows changed as result of the insert
@@ -101,7 +101,7 @@ function changePassword ($idusuario, $clave_usuario) {
 }
 
 //function to update the client information
-function updateUsuarioInfo($idusuario, $nombre_usuario, $apellido_usuario, $fecha_nacimiento, $mail_usuario) {
+function updateUsuarioInfo($id_usuario, $nombre_usuario, $apellido_usuario, $fecha_nacimiento, $mail_usuario) {
     // Create a connection object using the phpmotors coonection function
     $db = conectar();
     //The sql INSERT statement to update the user info in the users table
@@ -112,11 +112,11 @@ function updateUsuarioInfo($idusuario, $nombre_usuario, $apellido_usuario, $fech
     $stmt = $db->prepare($sql);
     //The next lines replace the sql placeholders with the actual values in the variables
     //The also tell the database the type of data they are.
-    $stmt->bindValue(':id_usuario', $idusuario, PDO::PARAM_INT);
     $stmt->bindValue(':nombre_usuario', $nombre_usuario, PDO::PARAM_STR);
     $stmt->bindValue(':apellido_usuario', $apellido_usuario, PDO::PARAM_STR);
     $stmt->bindValue(':fecha_nacimiento', $fecha_nacimiento, PDO::PARAM_STR);
     $stmt->bindValue(':mail_usuario', $mail_usuario, PDO::PARAM_STR);
+    $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
     //Insert the data
     $stmt->execute();
     //Ask how many rows changed as result of the insert
