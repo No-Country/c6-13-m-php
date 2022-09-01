@@ -94,3 +94,16 @@ form .submitBtn{
   padding: 1rem;
   display: block;
 }
+
+#listaArticulos{
+  padding: 0.5rem;
+  background-color: #ffffff;
+  margin: 0.5rem 0.5rem;
+  max-width: 32rem;
+  width: 100%;
+}
+
+#listaArticulos td{
+  padding: 0.5rem;
+  border: #1f5b9078 solid;
+}

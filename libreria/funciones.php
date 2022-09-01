@@ -22,21 +22,21 @@ function crearListadeCategorias($categorias){
   }
 
 function mostrarArticulos($listaArticulos){
-    $dataTable = '<thead>';
+    $dataTable = '<table id="listaArticulos"><thead>';
     $dataTable .= '<tr><th>Articulo</th><td>Categoria</td><td>Unidad Medida</td><td>Cantidad</td><td>Vencimiento</td><td>Estado</td></tr>';
-    $dataTable .= '</thead>';
+    $dataTable .= '</thead><br>';
     //set up the table body
     $dataTable .= '<tbody>';
     //iterate over all vehicles in the array and put each in a row
     forEach($listaArticulos as $articulo){
         $dataTable .= "<tr><td>$articulo[nombre_articulo]</td>";
-        $dataTable .= "<td>$articulo[cod_categoria]</td>";
+        $dataTable .= "<td>$articulo[id_categoria]</td>";
         $dataTable .= "<td>$articulo[unidad_medida]</td>";
         $dataTable .= "<td>$articulo[cantidad_articulo]</td>";
         $dataTable .= "<td>$articulo[fecha_vencimiento]</td>";
         $dataTable .= "<td>$articulo[estado]</td></tr>";
     }
-    $dataTable .= '</tbody>';
+    $dataTable .= '</tbody></table>';
     return $dataTable;
 }
 

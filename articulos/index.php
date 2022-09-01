@@ -26,26 +26,26 @@ switch ($action){
   
   case 'agregarArticulo':
     $nombre_articulo = trim(filter_input(INPUT_POST, 'nombre_articulo', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-    $cod_categoria = trim(filter_input(INPUT_POST, 'cod_categoria', FILTER_SANITIZE_NUMBER_INT));
+    $id_categoria = trim(filter_input(INPUT_POST, 'id_categoria', FILTER_SANITIZE_NUMBER_INT));
     $unidad_medida = trim(filter_input(INPUT_POST, 'unidad_medida', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION));
     $cantidad_articulo = trim(filter_input(INPUT_POST, 'cantidad_articulo', FILTER_SANITIZE_NUMBER_INT));
     $fecha_vencimiento = trim(filter_input(INPUT_POST, 'fecha_vencimiento', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-    $cod_usuario = trim(filter_input(INPUT_POST, 'cod_usuario', FILTER_SANITIZE_NUMBER_INT));
+    $id_usuario = trim(filter_input(INPUT_POST, 'id_usuario', FILTER_SANITIZE_NUMBER_INT));
     $estado = trim(filter_input(INPUT_POST, 'estado', FILTER_SANITIZE_FULL_SPECIAL_CHARS, ));
     
     //Check if any input is empty
-    if(empty($nombre_articulo) || empty($cod_categoria) || empty($unidad_medida) || empty($cantidad_articulo) ||
-    empty($fecha_vencimiento) || empty($cod_usuario) || empty($estado)){
+    if(empty($nombre_articulo) || empty($id_categoria) || empty($unidad_medida) || empty($cantidad_articulo) ||
+    empty($fecha_vencimiento) || empty($id_usuario) || empty($estado)){
       $message = '<p class="error-message"> Por favor, complete todos los campos antes de agregar el producto </p>';
       include '../views/nuevo-articulo.php';
       exit;
     }
 
     //Create the actual date to keep track of every input
-    $fecha_ingreso = date('d-m-y');
+    $fecha_ingreso = date('Y-m-d');
 
     //Send the data to the model
-    $addOutcome = agregarArticulo($nombre_articulo, $cod_categoria, $unidad_medida, $cantidad_articulo, $fecha_vencimiento, $cod_usuario, $estado, $fecha_ingreso);
+    $addOutcome = agregarArticulo($nombre_articulo, $id_categoria, $unidad_medida, $cantidad_articulo, $fecha_vencimiento, $id_usuario, $estado, $fecha_ingreso);
 
     //Check and report the result
     if($addOutcome === 1){
@@ -53,7 +53,7 @@ switch ($action){
       include '../views/nuevo-articulo.php';
       exit;
     }
-    $listaArticulos = obtenerArticulosPorUsuario($cod_usuario);
+    $listaArticulos = obtenerArticulosPorUsuario($id_usuario);
     $mostrarArticulos = mostrarArticulos($listaArticulos);
 
     break;
@@ -73,7 +73,9 @@ switch ($action){
     break;
 
   default:
-    
+    $usuarioInfo = $_SESSION['usuarioInfo'];
+    $listaArticulos = obtenerArticulosPorUsuario($usuarioInfo['id_usuario']);
+    $mostrarArticulos = mostrarArticulos($listaArticulos);
     include '../views/mis-articulos.php';
     break;
     

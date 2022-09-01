@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php 
+if(!$_SESSION['loggedin']){
+  $_SESSION['message'] = "<p class='mensajeError'>Por favor inicie sesión para poder agregar artículos.</p>";
+  header('LOCATION: /c6-13-m-php/usuarios/?action=login');
+  exit;
+}
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -88,7 +94,7 @@
 
             <input type="submit" name="submit" id="regbtn" value="Agregar Artículo">
             <input type="hidden" name="action" value="agregarArticulo">
-            <input type="hidden" name="cod_usuario" value='<?php if(isset($clientData['cod_usuario'])){ echo $clientData['cod_usuario'];}?>'>
+            <input type="hidden" name="id_usuario" value='<?php if(isset($usuarioInfo['id_usuario'])){ echo $usuarioInfo['id_usuario'];}?>'>
 
           </form>
           <?php if(isset($mostrarArticulos)){
@@ -104,4 +110,4 @@
             </footer>
     </div>
 </body>
-</html>
+</html><?php unset($_SESSION['message']) ?>

@@ -29,6 +29,9 @@
       if (isset($_SESSION['message'])) {
         echo $_SESSION['message'];
       }
+      if (isset($message)) {
+        echo $message;
+      }
       ?>
       <form  method="post" action="/c6-13-m-php/usuarios/">
         <label 
@@ -63,4 +66,4 @@
             </footer>
     
 </body>
-</html>
+</html><?php unset($_SESSION['message']) ?>

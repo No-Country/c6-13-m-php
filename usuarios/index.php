@@ -213,7 +213,9 @@ switch ($action){
 
     //The default case to deliver the admin view
     default:
-    
+    $usuarioInfo = $_SESSION['usuarioInfo'];
+    $listaArticulos = obtenerArticulosPorUsuario($usuarioInfo['id_usuario']);
+    $mostrarArticulos = mostrarArticulos($listaArticulos);
     include '../views/perfil.php';
     break;        
 }
