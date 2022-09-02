@@ -46,7 +46,7 @@
               <div  class="img-seccion" id="img-almacen">
                 
               </div>
-              <button class="btn btn-primary mt-3">Ir al almacenamiento</button>
+              <a class="btn btn-primary mt-3" href="/c6-13-m-php/articulos/?action=articulosAlmacenados">Ir al almacenamiento</a>
             </div>
         </div>
         <hr>

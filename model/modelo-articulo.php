@@ -108,3 +108,39 @@ function obtenerCategorias(){
   $stmt->closeCursor();
   return $categorias;
 }
+
+function borrarArticulo($id_articulo){
+  //create a connection object using the php motors connection
+  $db = conectar();
+  //the SQL statement
+  $sql = 'DELETE FROM tbl_articulos WHERE id_articulo = :id_articulo';
+  //create the prepared statement using the php motors connection
+  $stmt = $db->prepare($sql);
+  //The next nine lines replace the placeholders in the SQL
+  //statement with the actual values in the variables
+  //and tells the database the type of data it is 
+  $stmt->bindValue(':id_articulo', $id_articulo, PDO::PARAM_INT);
+  //insert the data
+  $stmt->execute();
+  //ask how maany rows changed as a result of our insert
+  $rowsChanged = $stmt->rowCount();
+  //close the database interaction
+  $stmt->closeCursor();
+  //return the indication of succes (rows changed)
+  return $rowsChanged;
+}
+
+function obtenerArticulosAlmPorUsuario($id_usuario){
+  $db = conectar();
+  $sql = 'SELECT art.nombre_articulo, art.unidad_medida, art.cantidad_articulo,
+  art.fecha_vencimiento, art.estado, art.id_articulo, cat.nombre_categoria
+  FROM tbl_articulos as art
+  LEFT JOIN tbl_categorias as cat ON art.id_categoria = cat.id_categoria
+  WHERE id_usuario = :id_usuario AND art.estado = almacenado';
+  $stmt = $db->prepare($sql);
+  $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
+  $stmt->execute();
+  $articulos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  $stmt->closeCursor();
+  return $articulos;
+}

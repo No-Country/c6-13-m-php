@@ -15,7 +15,7 @@
         <a class="nav-link" href="#">Mis listas</a>
       </li>
       <li class="nav-item col-md-3">
-        <a class="nav-link " href="#">Almacenamiento</a>
+        <a class="nav-link " href="/c6-13-m-php/articulos/?action=articulosAlmacenados">Almacenamiento</a>
       </li>
     </ul>
   </div>

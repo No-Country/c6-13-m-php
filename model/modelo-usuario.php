@@ -60,7 +60,7 @@ function getUsuario($mail_usuario){
     //Gets the connection to the sever and DB
     $db = conectar();
     //SQL to get the user info mation from the DB
-    $sql = 'SELECT id_usuario, nombre_usuario, apellido_usuario, fecha_nacimiento, fecha_creacion, mail_usuario, clave_usuario
+    $sql = 'SELECT id_usuario, nivel_usuario, nombre_usuario, apellido_usuario, fecha_nacimiento, fecha_creacion, mail_usuario, clave_usuario
     FROM tbl_usuarios
     WHERE mail_usuario = :mail_usuario';
     //code to prepare the sql statement
@@ -145,4 +145,41 @@ function getUsuarioUpdate($id_usuario){
     $stmt->closeCursor();
     return $clientInfo;
 }
-?>
+
+function obtenerinfoUsuarios(){
+    //Gets the connection to the sever and DB
+    $db = conectar();
+    //SQL to get the updated user infomation from the DB
+    $sql = 'SELECT *
+            FROM tbl_usuarios
+            WHERE nivel_usuario = 1';
+    //code to prepare the sql statement
+    $stmt = $db->prepare($sql);
+    //Execute the code
+    $stmt->execute();
+    //fetch the user detail with the the table column name as the associative name value pair
+    $infoUsuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $infoUsuarios;
+}
+
+function obtenerUsuario($id_usuario){
+    //Gets the connection to the sever and DB
+    $db = conectar();
+    //SQL to get the user info mation from the DB
+    $sql = 'SELECT nombre_usuario, apellido_usuario, fecha_nacimiento, fecha_creacion, mail_usuario
+    FROM tbl_usuarios
+    WHERE id_usuario = :id_usuario';
+    //code to prepare the sql statement
+    $stmt = $db->prepare($sql);
+    //bind the placeholder to the passed in variable
+    $stmt->bindValue(':id_usuario',$id_usuario,PDO::PARAM_STR);
+    //Execute the code
+    $stmt->execute();
+    //fetch the user detail with the the table column name as the associative name value pair
+    $clientInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $stmt->closeCursor();
+
+    return $clientInfo;
+}

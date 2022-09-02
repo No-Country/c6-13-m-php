@@ -50,7 +50,7 @@ if(!$_SESSION['loggedin']){
               required 
               <?php if(isset($info_articulo['nombre_articulo'])){echo "value='$info_articulo[nombre_articulo]'";} ?> ></label>
 
-            <?php echo $listaCategorias; if(isset($info_articulo['categoria'])){echo "value='$info_articulo[categoria]'";}  ?>
+            <?php echo $categoria_seleccionada;  ?>
             
             <label for="unidad_medida">Unidad medida: 
               <select 
@@ -59,11 +59,11 @@ if(!$_SESSION['loggedin']){
               name="unidad_medida" 
               required>
                 <option value="">Seleccionar</option>
-                <option value="Kilos">Kilos</option>
-                <option value="Cm3">Cm3</option>
-                <option value="Litros">Litros</option>
-                <option value="Onzas">Onzas</option>
-                <option value="Gramos">Gramos</option>
+                <option <?php if($info_articulo['unidad_medida'] == "Kilos") echo "selected='selected'"; ?> value="Kilos">Kilos</option>
+                <option <?php if($info_articulo['unidad_medida'] == "Cm3") echo "selected='selected'"; ?> value="Cm3">Cm3</option>
+                <option <?php if($info_articulo['unidad_medida'] == "Litros") echo "selected='selected'"; ?> value="Litros">Litros</option>
+                <option <?php if($info_articulo['unidad_medida'] == "Onzas") echo "selected='selected'"; ?> value="Onzas">Onzas</option>
+                <option <?php if($info_articulo['unidad_medida'] == "Gramos") echo "selected='selected'"; ?> value="Gramos">Gramos</option>
                 
               </select></label>
 
@@ -73,14 +73,14 @@ if(!$_SESSION['loggedin']){
               id="cantidad_articulo" 
               name="cantidad_articulo" 
               required 
-              <?php if(isset($cantidad_articulo)){echo "value='$cantidad_articulo'";} ?> ></label>
+              <?php if(isset($info_articulo['cantidad_articulo'])){echo "value='$info_articulo[cantidad_articulo]'";} ?> ></label>
 
             <label for="fecha_vencimiento">Fecha de vencimiento: 
               <input 
               type="date"
               id="fecha_vencimiento" 
               name="fecha_vencimiento" 
-              <?php if(isset($fecha_vencimiento)){echo "value='$fecha_vencimiento'";}  ?> 
+              <?php if(isset($info_articulo['fecha_vencimiento'])){echo "value='$info_articulo[fecha_vencimiento]'";}  ?> 
               required></label>
 
               <label for="estado">Estado: 
@@ -90,19 +90,17 @@ if(!$_SESSION['loggedin']){
               name="estado" 
               required>
                 <option value="">Seleccionar</option>
-                <option value="en uso">En uso</option>
-                <option value="disponible">Disponible</option>
-                <option value="almacenado">Almacenado</option>
+                <option <?php if($info_articulo['estado'] == "en uso") echo "selected='selected'"; ?> value="en uso">En uso</option>
+                <option <?php if($info_articulo['estado'] == "disponible") echo "selected='selected'"; ?> value="disponible">Disponible</option>
+                <option <?php if($info_articulo['estado'] == "almacenado") echo "selected='selected'"; ?> value="almacenado">Almacenado</option>
               </select></label>
 
-            <input type="submit" name="submit" id="regbtn" value="Agregar Artículo">
-            <input type="hidden" name="action" value="agregarArticulo">
-            <input type="hidden" name="id_usuario" value='<?php if(isset($usuarioInfo['id_usuario'])){ echo $usuarioInfo['id_usuario'];}?>'>
+            <input type="submit" name="submit" id="regbtn" value="Editar Artículo">
+            <input type="hidden" name="action" value="editarArticulo">
+            <input type="hidden" name="id_articulo" value='<?php if(isset($info_articulo['id_articulo'])){ echo $info_articulo['id_articulo'];}?>'>
 
           </form>
-          <?php if(isset($mostrarArticulos)){
-            echo $mostrarArticulos;
-          } ?>
+         
 
 
         </main>

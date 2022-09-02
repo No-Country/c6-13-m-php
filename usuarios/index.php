@@ -7,7 +7,6 @@
 session_start();
 // Get the DB connection file
 require_once '../libreria/conexion.php';
-//Get the PHP main model for use when needed
 
 //Get the accounts-model.php file
 require_once '../model/modelo-usuario.php';
@@ -216,11 +215,26 @@ switch ($action){
 
         break;
 
+        case 'infoUsuarios':
+            $info_usuarios = obtenerinfoUsuarios();
+            $construirTablaUsuarios = mostrarinfoUsuarios($info_usuarios);
+            include '../views/info-usuarios.php';
+            exit;
+
+            break;
+
+        case 'borrarUsuario':
+            $id_usuario = trim(filter_input(INPUT_GET, 'id_usuario', FILTER_VALIDATE_INT));
+            $usuarioInfo = obtenerUsuario($id_usuario);
+            include '../views/borrar-perfil.php';
+            exit;
+
+            break;
+  
     //The default case to deliver the admin view
     default:
     $usuarioInfo = $_SESSION['usuarioInfo'];
-    $listaArticulos = obtenerArticulosPorUsuario($usuarioInfo['id_usuario']);
-    $mostrarArticulos = mostrarArticulos($listaArticulos);
+    
     include '../views/perfil.php';
     break;        
 }
