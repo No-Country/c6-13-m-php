@@ -54,11 +54,11 @@ function obtenerInfoArticulo($id_articulo){
   return $info_articulo;
 }
 
-function editarArticulo($nombre_articulo, $cod_categoria, $unidad_medida, $cantidad_articulo, $fecha_vencimiento, $estado, $id_articulo){
+function editarArticulo($nombre_articulo, $id_categoria, $unidad_medida, $cantidad_articulo, $fecha_vencimiento, $estado, $id_articulo){
   //create a connection object using the php motors connection
   $db = conectar();
   //the SQL statement
-  $sql = 'UPDATE tbl_articulos SET nombre_articulo = :nombre_articulo, cod_categoria = :cod_categoria, unidad_medida = :unidad_medida,
+  $sql = 'UPDATE tbl_articulos SET nombre_articulo = :nombre_articulo, id_categoria = :id_categoria, unidad_medida = :unidad_medida,
   cantidad_articulo = :cantidad_articulo, fecha_vencimiento = :fecha_vencimiento, estado = :estado
   WHERE id_articulo = :id_articulo';
   //create the prepared statement using the php motors connection
@@ -67,7 +67,7 @@ function editarArticulo($nombre_articulo, $cod_categoria, $unidad_medida, $canti
   //statement with the actual values in the variables
   //and tells the database the type of data it is 
   $stmt->bindValue(':nombre_articulo', $nombre_articulo, PDO::PARAM_STR);
-  $stmt->bindValue(':cod_categoria', $cod_categoria, PDO::PARAM_INT);
+  $stmt->bindValue(':id_categoria', $id_categoria, PDO::PARAM_INT);
   $stmt->bindValue(':unidad_medida', $unidad_medida, PDO::PARAM_STR);
   $stmt->bindValue(':cantidad_articulo', $cantidad_articulo, PDO::PARAM_INT);
   $stmt->bindValue(':fecha_vencimiento', $fecha_vencimiento, PDO::PARAM_STR);
@@ -85,8 +85,10 @@ function editarArticulo($nombre_articulo, $cod_categoria, $unidad_medida, $canti
 
 function obtenerArticulosPorUsuario($id_usuario){
   $db = conectar();
-  $sql = 'SELECT *
-  FROM tbl_articulos
+  $sql = 'SELECT art.nombre_articulo, art.unidad_medida, art.cantidad_articulo,
+  art.fecha_vencimiento, art.estado, art.id_articulo, cat.nombre_categoria
+  FROM tbl_articulos as art
+  LEFT JOIN tbl_categorias as cat ON art.id_categoria = cat.id_categoria
   WHERE id_usuario = :id_usuario';
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);

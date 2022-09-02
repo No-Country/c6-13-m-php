@@ -15,7 +15,7 @@ function crearListadeCategorias($categorias){
     $listaCategorias = '<label for="listaCategorias">Elige una categoria: <select name="id_categoria" id="listaCategorias">';
     $listaCategorias .= "<option>Categoria</option>";
     foreach ($categorias as $categoria) {
-      $listaCategorias .= "<option value='$categoria[id_categoria]'>$categoria[Nombre_categoria]</option>";
+      $listaCategorias .= "<option value='$categoria[id_categoria]'>$categoria[nombre_categoria]</option>";
     }
     $listaCategorias .= '</select></label>';
     return $listaCategorias;
@@ -23,18 +23,20 @@ function crearListadeCategorias($categorias){
 
 function mostrarArticulos($listaArticulos){
     $dataTable = '<table id="listaArticulos"><thead>';
-    $dataTable .= '<tr><th>Articulo</th><td>Categoria</td><td>Unidad Medida</td><td>Cantidad</td><td>Vencimiento</td><td>Estado</td></tr>';
+    $dataTable .= '<tr><th>Articulo</th><td>Categoria</td><td>Unidad Medida</td><td>Cantidad</td><td>Vencimiento</td><td>Estado</td><td>Editar</td><td>Borrar</td></tr>';
     $dataTable .= '</thead><br>';
     //set up the table body
     $dataTable .= '<tbody>';
     //iterate over all vehicles in the array and put each in a row
     forEach($listaArticulos as $articulo){
         $dataTable .= "<tr><td>$articulo[nombre_articulo]</td>";
-        $dataTable .= "<td>$articulo[id_categoria]</td>";
+        $dataTable .= "<td>$articulo[nombre_categoria]</td>";
         $dataTable .= "<td>$articulo[unidad_medida]</td>";
         $dataTable .= "<td>$articulo[cantidad_articulo]</td>";
         $dataTable .= "<td>$articulo[fecha_vencimiento]</td>";
-        $dataTable .= "<td>$articulo[estado]</td></tr>";
+        $dataTable .= "<td>$articulo[estado]</td>";
+        $dataTable .= "<td><a href='?action=editarArt&id_articulo=$articulo[id_articulo]' title='Click aquí para editar el articulo'>Editar</a></td>";
+        $dataTable .= "<td><a href='?action=borrarArt&id_articulo=$articulo[id_articulo]' title='Click aquí para borrar el articulo'>Borrar</a></td></tr>";
     }
     $dataTable .= '</tbody></table>';
     return $dataTable;

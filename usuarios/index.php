@@ -88,10 +88,15 @@ switch ($action){
         //Since a valid password exists, continue with the login process
         //call the getClient function to get the users details with a matching email address
         $UsuarioInfo = getUsuario($mail_usuario);
+        if(empty($UsuarioInfo)){
+            $message = '<p class="mensajeError">El usuario no existe, por favor registrese</p>';
+            include '../views/registro.php';
+            exit;
+        }
         
         //check that the password matches with the hashed one from the DB
         $hashCheck = password_verify($clave_usuario, $UsuarioInfo['clave_usuario']);
-       
+        
         if(!$hashCheck){
             $message = '<p class="mensajeError">Error en la clave. Reingresela correctamente.</p>';
             include '../views/login.php';

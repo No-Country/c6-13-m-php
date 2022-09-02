@@ -27,7 +27,7 @@ switch ($action){
   case 'agregarArticulo':
     $nombre_articulo = trim(filter_input(INPUT_POST, 'nombre_articulo', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
     $id_categoria = trim(filter_input(INPUT_POST, 'id_categoria', FILTER_SANITIZE_NUMBER_INT));
-    $unidad_medida = trim(filter_input(INPUT_POST, 'unidad_medida', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION));
+    $unidad_medida = trim(filter_input(INPUT_POST, 'unidad_medida', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
     $cantidad_articulo = trim(filter_input(INPUT_POST, 'cantidad_articulo', FILTER_SANITIZE_NUMBER_INT));
     $fecha_vencimiento = trim(filter_input(INPUT_POST, 'fecha_vencimiento', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
     $id_usuario = trim(filter_input(INPUT_POST, 'id_usuario', FILTER_SANITIZE_NUMBER_INT));
@@ -49,8 +49,8 @@ switch ($action){
 
     //Check and report the result
     if($addOutcome === 1){
-      $message = "<p class='succes-message'>Artículo agregado con éxito!</p>";
-      include '../views/nuevo-articulo.php';
+      $_SESSION['message'] = "<p class='succes-message'>Artículo agregado con éxito!</p>";
+      header('location: /c6-13-m-php/articulos/');
       exit;
     }
     $listaArticulos = obtenerArticulosPorUsuario($id_usuario);
@@ -63,6 +63,7 @@ switch ($action){
     $id_articulo = filter_input(INPUT_GET, 'id_articulo', FILTER_VALIDATE_INT);
     //Use the id_articulo to get all the information for that articule and store it in to a variable
     $info_articulo = obtenerInfoArticulo($id_articulo);
+    
     //Check if there is any info for that ID
     if (count($info_articulo) < 1){
       $message = "<p class='error-message'> Lo sentimos, no existe información para éste artículo. Intenta nuevamente </p>";

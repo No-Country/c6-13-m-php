@@ -34,7 +34,9 @@ if(!$_SESSION['loggedin']){
           <p>Aca podrás agregar los artículos que desees al stock de productos que tienes en tu vivienda</p>
 
           <?php
-          if (isset($message)) {
+          if (isset($_SESSION['message'])) {
+            echo $_SESSION['message'];
+          } elseif (isset($message)) {
             echo $message;
           }
           ?>
