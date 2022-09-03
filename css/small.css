@@ -2,15 +2,10 @@
   height: 100px;
   font-weight: bold;
 }
-@font-face {
-  font-family: 'dynapuff';
-  src: url('../multimedia/fonts/DynaPuff.ttf') format('ttf');
-  font-style: normal;
-  font-weight: normal;
-}
+
 body{
-  font-family: "dynapuff";
-  background-color: #F5B275;
+  font-family: 'Rajdhani', sans-serif;
+  background-color: #b5fdf2;
 }
 #menu-reponsive{
   display: none;
@@ -63,4 +58,52 @@ body{
 }
 body,td,th {
 	font-size: 20px;
+}
+
+/* Form */
+form{
+  display: flex;
+  flex-direction: column;
+}
+form{
+  padding: 0.2rem;
+}
+form input, form select{
+  display: block;
+  border-color: #277eca96;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  max-width: 20rem;
+  margin-right: 2px;
+}
+form label{
+  padding-left: 0.5rem;
+}
+form .submitBtn{
+  max-width: 30rem;
+  padding: 0.5rem;
+  margin-top: 1rem;
+  background-color: #4c96d7;
+}
+#regbtn{
+  background-color: #4c96d7;
+  cursor: pointer;
+}
+.login a, .registration p{
+  padding: 1rem;
+  display: block;
+}
+
+#listaArticulos{
+  padding: 0.5rem;
+  background-color: #ffffff;
+  margin: 0.5rem 0.5rem;
+  max-width: 32rem;
+  width: 100%;
+}
+
+#listaArticulos td{
+  padding: 0.5rem;
+  border: #1f5b9078 solid;
 }

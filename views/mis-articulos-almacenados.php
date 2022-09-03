@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php 
+if(!$_SESSION['loggedin']){
+  $_SESSION['message'] = "<p class='mensajeError'>Por favor inicie sesión para poder agregar artículos.</p>";
+  header('LOCATION: /c6-13-m-php/usuarios/?action=login');
+  exit;
+}
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -13,8 +19,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400&family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
 
 </head>
-<body class="container">
-    
+<body>
+    <div class="container">
         <header>
           <?php require_once $_SERVER['DOCUMENT_ROOT'].'/c6-13-m-php/auxiliares/header.php'; ?>
         </header> 
@@ -22,17 +28,33 @@
           <?php require_once $_SERVER['DOCUMENT_ROOT'].'/c6-13-m-php/auxiliares/nav-bar.php'; ?>
         </nav>
         <hr>
-      <main>
+        
+        <main>
+          <h1>Mis artículos Almacenados</h1>
+          <p>Acá puedes ver los artículos que tienes almacenados</p>
+
+          <?php
+          if (isset($_SESSION['message'])) {
+            echo $_SESSION['message'];
+          } elseif (isset($message)) {
+            echo $message;
+          }
+          ?>
+          
+          <table id="listaArticulos">
+          <?php if(isset($mostrarArticulos)){
+            echo $mostrarArticulos;
+          } ?>
+          </table>
+        
 
 
+        </main>
 
-
-      
-      </main>
         <hr>
             <footer class="mt-3 row ">
               <?php require_once $_SERVER['DOCUMENT_ROOT'].'/c6-13-m-php/auxiliares/footer.php'; ?>
             </footer>
-    
+    </div>
 </body>
-</html>
+</html><?php unset($_SESSION['message']) ?>

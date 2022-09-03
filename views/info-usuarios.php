@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php 
+if(!$_SESSION['loggedin']){
+  header('LOCATION: /c6-13-m-php/');
+      exit;
+} if($_SESSION['usuarioInfo']['nivel_usuario'] < 2){
+  header('LOCATION: /c6-13-m-php/');
+      exit;
+}
+if (isset($_SESSION['message'])){
+  $message = $_SESSION['message'];
+}
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -18,13 +29,18 @@
         <header>
           <?php require_once $_SERVER['DOCUMENT_ROOT'].'/c6-13-m-php/auxiliares/header.php'; ?>
         </header> 
-        <nav class="navbar navbar-expand-lg  mt-5">
+        <nav class="navbar navbar-expand-lg mt-5">
           <?php require_once $_SERVER['DOCUMENT_ROOT'].'/c6-13-m-php/auxiliares/nav-bar.php'; ?>
         </nav>
         <hr>
       <main>
+        <h1>Información de los usuarios</h1>
 
-
+        <table id="listaArticulos">
+              <?php if(isset($construirTablaUsuarios)){
+                echo $construirTablaUsuarios;
+              } ?>
+              </table>
 
 
       
