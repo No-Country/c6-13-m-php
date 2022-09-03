@@ -134,6 +134,17 @@ switch ($action){
       }
       break;
 
+      case 'articulosAlmacenados':
+        $usuarioInfo = $_SESSION['usuarioInfo'];
+        $articulosAlmacenados = obtenerArticulosAlmPorUsuario($usuarioInfo['id_usuario']);
+        $mostrarArticulos = mostrarArticulos($articulosAlmacenados);
+        
+        include '../views/mis-articulos-almacenados.php';
+        exit;
+
+        break;
+
+
 
 
   default:

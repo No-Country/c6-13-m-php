@@ -45,38 +45,14 @@ if(!$_SESSION['loggedin']){
     <h2>Manejo de cuenta</h2>
     <p class='admin-p'>Usa este link para editar la información de tu cuenta <a href='/c6-13-m-php/usuarios/?action=editarPerfil'>Actualizar Información de la cuenta</a></p>
     <?php 
-    if($_SESSION['usuarioInfo']['nivel_usuario'] >1){
-      echo "<h2>Administrar Usuarios</h2>";
-      echo "<p class='admin-p'>Clientes con el nivel Admin deben usar éste apartado para administrar las cuentas de usuario</p>";
-      echo "<p class='admin-p'>Administrador de usuarios: <a href='/c6-13-m-php/usuarios/?action=infoUsuarios'>Información de los usuarios.</a></p>";
+    if(isset($_SESSION['usuarioInfo']['nivel_usuario'])){
+      if($_SESSION['usuarioInfo']['nivel_usuario'] > 1){
+        echo "<h2>Administrar Usuarios</h2>";
+        echo "<p class='admin-p'>Clientes con el nivel Admin deben usar éste apartado para administrar las cuentas de usuario</p>";
+        echo "<p class='admin-p'>Administrador de usuarios: <a href='/c6-13-m-php/usuarios/?action=infoUsuarios'>Información de los usuarios.</a></p>";}
     }
     ?>
-    <!-- <?php
-    if(isset($_SESSION['reviewsData'])){
-      $reviewsData = $_SESSION['reviewsData'];
-      echo "<h2>Manage your product reviews</h2>";
-      if(empty($reviewsData)){
-        echo "<p class='admin-p'>You have no reviews for the moment, go and make some!</p>";
-      } else {
-        echo "<ul>";
-        foreach($reviewsData as $data){
-          $date = date('j F, Y', strtotime($data['reviewDate']));
-          echo "<li>$data[invMake] $data[invModel] (Reviewed on $date): ";
-          echo "<a href='/phpmotors/reviews/?action=editReview&reviewId=$data[reviewId]' title='Click here to edit the Review'>Edit</a>";
-          echo " | ";
-          echo "<a href='/phpmotors/reviews/?action=delReview&reviewId=$data[reviewId]' title='Click here to delete the Review'>Delete</a>";
-          echo "</li>";
           
-        }
-        echo "</ul>";
-      }
-    }
-    ?> -->
-
-
-
-
-      
       </main>
         <hr>
             <footer class="mt-3 row ">

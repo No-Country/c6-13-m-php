@@ -136,7 +136,8 @@ function obtenerArticulosAlmPorUsuario($id_usuario){
   art.fecha_vencimiento, art.estado, art.id_articulo, cat.nombre_categoria
   FROM tbl_articulos as art
   LEFT JOIN tbl_categorias as cat ON art.id_categoria = cat.id_categoria
-  WHERE id_usuario = :id_usuario AND art.estado = almacenado';
+  WHERE id_usuario = :id_usuario AND art.estado = "almacenado" 
+  ORDER BY art.fecha_vencimiento';
   $stmt = $db->prepare($sql);
   $stmt->bindValue(':id_usuario', $id_usuario, PDO::PARAM_INT);
   $stmt->execute();
